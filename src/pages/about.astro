@@ -1,21 +1,35 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const pageTitle = 'About Yaso Blog';
+
+// My identity
+const identity = {
+    name: 'Yasin Alhadi',
+    country: 'Sudan',
+    role: 'Software Engineer',
+    blog: 'Yaso Blog',
+    description: 'This is a simple blog built with Astro.',
+    interests: ['Web Development', 'Programming', 'Technology', 'technical writing'],
+};
+
+const happy = true;
+const finished = true;
+const goal = 4;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/blog">Blog</a>
-
-		<h1>Yasin Alhadi</h1>
+<BaseLayout pageTitle={pageTitle}>
+        <style define:vars={{skillColor, fontWeight, textCase}}>
+            .skills {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
 
         <h2>This is my personal blog</h2>
 
@@ -23,8 +37,32 @@
             Welcome to Yaso Bolg! This is a simple blog built with Astro.
         </p>
 
+        <h2>My Identity</h2>
+
         <p>
-            I'm a software engineer and I love to write about web development, programming, and technology.
+            My name is {identity.name}. I am form {identity.country}. I am a {identity.role}. I am the owner of {identity.blog}.
         </p>
-	</body>
-</html>
+
+        <h2>My Interests</h2>
+
+        <ul>
+            {identity.interests.map((interest) => (
+                <li class="skills">{interest}</li>
+            ))}
+        </ul>
+
+        {happy && (
+            <p>Im Happy</p>
+        )}
+
+        {finished && (
+            <p>Im not finished yet</p>
+        )}
+
+        {goal === 4 ? (
+            <p>My goal is to write 3 articles</p>
+        ) : (
+            <p>My goal is to write more than 3 articles</p>
+        )}
+
+</BaseLayout>
